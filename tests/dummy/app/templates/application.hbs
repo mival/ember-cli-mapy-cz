@@ -1,3 +1,23 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Welcome to ember-cli-mapy-cz</h2>
 
-{{outlet}}
+<form>
+  <label>Latitude:
+    {{input type="number" step="any" value=latitude}}
+  </label>
+  <label>Longitude:
+    {{input type="number" step="any" value=longitude}}
+  </label>
+  <label>Zoom ({{zoom}}x):
+    {{input type="range" min=2 max=36 value=zoom}}
+  </label>
+</form>
+
+<hr />
+
+{{#s-map latitude=latitude longitude=longitude zoom=zoom as |map|}}
+  {{#s-map-layer map=map as |layer|}}
+    {{#each markers as |marker|}}
+      {{s-map-marker layer=layer latitude=marker.latitude longitude=marker.longitude}}
+    {{/each}}
+  {{/s-map-layer}}
+{{/s-map}}
