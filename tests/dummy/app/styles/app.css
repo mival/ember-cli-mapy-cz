@@ -1,0 +1,12 @@
+.s-map {
+  width: 640px;
+  height: 480px;
+}
+
+code {
+  background-color: #ccc;
+  padding: 1em;
+  margin: 1em;
+  display: block;
+  white-space: pre-wrap;
+}

@@ -14,6 +14,24 @@
 
 <hr />
 
+<h3>Empty map</h3>
+
+<code>\{{s-map latitude=latitude longitude=longitude zoom=zoom}}
+</code>
+
+{{s-map latitude=latitude longitude=longitude zoom=zoom }}
+
+<h3>Map with some markers</h3>
+
+<code>\{{#s-map latitude=latitude longitude=longitude zoom=zoom as |map|}}
+  \{{#s-map-layer map=map as |layer|}}
+    \{{#each markers as |marker|}}
+      \{{s-map-marker layer=layer latitude=marker.latitude longitude=marker.longitude}}
+    \{{/each}}
+  \{{/s-map-layer}}
+\{{/s-map}}
+</code>
+
 {{#s-map latitude=latitude longitude=longitude zoom=zoom as |map|}}
   {{#s-map-layer map=map as |layer|}}
     {{#each markers as |marker|}}

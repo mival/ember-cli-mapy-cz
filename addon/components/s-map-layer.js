@@ -4,7 +4,6 @@ import layout from '../templates/components/s-map-layer';
 export default Ember.Component.extend({
   layout: layout,
   layer: null,
-  markersCount: 0,
 
   mapObserver: Ember.observer('map.map', function() {
 		let map = this.get('map.map');
@@ -13,10 +12,5 @@ export default Ember.Component.extend({
     layer.enable();
 
     this.set('layer', layer);
-  }),
-
-  getMarkerId: function () {
-    this.incrementProperty('markersCount');
-    return this.get('markersCount');
-  }
+  })
 });
