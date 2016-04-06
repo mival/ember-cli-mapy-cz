@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     let map = this.get('map');
     let currentZoom = map.getZoom();
     let desiredZoom = this.get('zoom');
-    let zoomDiff = desiredZoom - currentZoom
+    let zoomDiff = desiredZoom - currentZoom;
 
     map.setZoom(zoomDiff);
   }),

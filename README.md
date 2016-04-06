@@ -1,6 +1,6 @@
 # Ember-cli-mapy-cz
 
-[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-mapy-cz.svg)](https://emberobserver.com/addons/ember-cli-mapy-cz))
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-mapy-cz.svg)](https://emberobserver.com/addons/ember-cli-mapy-cz) [![Build Status](https://travis-ci.org/MichalBryxi/ember-cli-mapy-cz.svg?branch=master)](https://travis-ci.org/MichalBryxi/ember-cli-mapy-cz)
 
 An ember-cli add-on for easy integration with mapy.cz maps. Each object displayed on map is inserted via child component, so you can easily declare which marker and when to display on map using {{#if}} and {{#each}} on template level.
 
