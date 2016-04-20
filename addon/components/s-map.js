@@ -3,12 +3,15 @@ import layout from '../templates/components/s-map';
 
 export default Ember.Component.extend({
   layout: layout,
+  classNames: ['s-map'],
+  attributeBindings: ['style'],
 
   map: null,
 
-  mapId: Ember.computed(function () {
+  setElementId: Ember.on('init', function() {
     let guid = Ember.guidFor(this);
-    return `s-map-${guid}`;
+    this.set('elementId', `s-map-${guid}`);
+    console.log(this.get('elementId'));
   }),
 
   centerObserver: Ember.observer('latitude', 'longitude', function() {
@@ -29,10 +32,10 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     this._super();
-    let mapId = this.get('mapId');
+    let elementId = this.get('elementId');
     let zoom = this.get('zoom');
     let center = SMap.Coords.fromWGS84(this.get('longitude'), this.get('latitude'));
-		let map = new SMap(JAK.gel(mapId), center, zoom);
+		let map = new SMap(JAK.gel(elementId), center, zoom);
 		map.addDefaultLayer(SMap.DEF_BASE).enable();
 		map.addDefaultControls();
 
