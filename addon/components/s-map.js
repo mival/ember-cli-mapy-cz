@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   setElementId: Ember.on('init', function() {
     let guid = Ember.guidFor(this);
     this.set('elementId', `s-map-${guid}`);
-    console.log(this.get('elementId'));
   }),
 
   centerObserver: Ember.observer('latitude', 'longitude', function() {

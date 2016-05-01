@@ -25,8 +25,8 @@
 
 <code>\{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
   \{{#s-map-layer map=map as |layer|}}
-    \{{#each markers as |marker|}}
-      \{{s-map-marker layer=layer latitude=marker.latitude longitude=marker.longitude}}
+    \{{#each points as |point|}}
+      \{{s-map-marker layer=layer latitude=point.latitude longitude=point.longitude}}
     \{{/each}}
   \{{/s-map-layer}}
 \{{/s-map}}
@@ -34,8 +34,55 @@
 
 {{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
   {{#s-map-layer map=map as |layer|}}
-    {{#each markers as |marker|}}
-      {{s-map-marker layer=layer latitude=marker.latitude longitude=marker.longitude}}
+    {{#each points as |point|}}
+      {{s-map-marker layer=layer latitude=point.latitude longitude=point.longitude}}
+    {{/each}}
+  {{/s-map-layer}}
+{{/s-map}}
+
+<h3>Map with markers and cards</h3>
+
+<code>\{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+  \{{#s-map-layer map=map as |layer|}}
+    \{{#each points as |point|}}
+      \{{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
+        \{{#if point.cardBody}}
+          \{{#s-map-card marker=marker header=point.cardHeader}}
+            &lt;dl&gt;
+              &lt;dt&gt;Plain text:&lt;/dt&gt;
+              &lt;dd&gt;\{{point.cardBody}}&lt;/dd&gt;
+
+              &lt;dt&gt;HTML:&lt;/dt&gt;
+              &lt;dd&gt;\{{{point.cardBody}}}&lt;/dd&gt;
+            &lt;/dl&gt;
+          \{{/s-map-card}}
+        \{{else}}
+          \{{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
+        \{{/if}}
+      \{{/s-map-marker}}
+    \{{/each}}
+  \{{/s-map-layer}}
+\{{/s-map}}
+</code>
+
+{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+  {{#s-map-layer map=map as |layer|}}
+    {{#each points as |point|}}
+      {{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
+        {{#if point.cardBody}}
+          {{#s-map-card marker=marker header=point.cardHeader}}
+            <dl>
+              <dt>Plain text:</dt>
+              <dd>{{point.cardBody}}</dd>
+
+              <dt>HTML:</dt>
+              <dd>{{{point.cardBody}}}</dd>
+            </dl>
+          {{/s-map-card}}
+        {{else}}
+          {{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
+        {{/if}}
+      {{/s-map-marker}}
     {{/each}}
   {{/s-map-layer}}
 {{/s-map}}

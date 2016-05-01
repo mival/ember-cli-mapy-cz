@@ -35,8 +35,33 @@ You must define the size of the canvas in which the map is displayed in your app
 ```handlebars
 {{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
   {{#s-map-layer map=map as |layer|}}
-    {{#each markers as |marker|}}
+    {{#each points as |point|}}
       {{s-map-marker layer=layer latitude=marker.latitude longitude=marker.longitude}}
+    {{/each}}
+  {{/s-map-layer}}
+{{/s-map}}
+```
+
+### Map with markers and cards
+- Create `s-map-card` component and pass it `s-map-marker` reference.
+- If you use `s-map-card` as a block, this block will be used for `body`.
+- If you use `s-map-card` in non-block version, then `body` property will be used for `body`.
+- You can always use `title` property to set `title` of the card.
+- If no title is provided, the card won't have one.
+
+```handlebars
+{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+  {{#s-map-layer map=map as |layer|}}
+    {{#each points as |point|}}
+      {{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
+        {{#if point.cardBody}}
+          {{#s-map-card marker=marker header=point.cardHeader}}
+            This is block version for the body of the card. We can pass dynamic arguments here: {{point.cardBody}}
+          {{/s-map-card}}
+        {{else}}
+          {{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
+        {{/if}}
+      {{/s-map-marker}}
     {{/each}}
   {{/s-map-layer}}
 {{/s-map}}
