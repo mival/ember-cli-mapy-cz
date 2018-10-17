@@ -1,11 +1,14 @@
-import Ember from 'ember';
+import { observer } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/s-map-card';
 
-export default Ember.Component.extend({
+const SMap = window.SMap;
+
+export default Component.extend({
   layout: layout,
   card: null,
 
-  markerObserver: Ember.observer('marker', 'marker.marker', function() {
+  markerObserver: observer('marker', 'marker.marker', function() {
 		let marker = this.get('marker.marker');
     let card = new SMap.Card();
     card.getHeader().innerHTML = this.getWithDefault('header', '');

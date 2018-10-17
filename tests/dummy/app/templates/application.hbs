@@ -1,38 +1,49 @@
 <h2 id="title">Welcome to ember-cli-mapy-cz</h2>
 
 <form>
-  <label>Latitude:
+  <label>
+    Latitude:
     {{input type="number" step="any" value=latitude}}
   </label>
-  <label>Longitude:
+  <label>
+    Longitude:
     {{input type="number" step="any" value=longitude}}
   </label>
-  <label>Zoom ({{zoom}}x):
+  <label>
+    Zoom ({{zoom}}x):
     {{input type="range" min=2 max=36 value=zoom}}
   </label>
 </form>
 
-<hr />
+<hr>
 
 <h3>Empty map</h3>
 
-<code>\{{s-map latitude=latitude longitude=longitude zoom=zoom}}
+<code>
+  \{{s-map latitude=latitude longitude=longitude zoom=zoom}}
 </code>
 
 {{s-map latitude=latitude longitude=longitude zoom=zoom }}
 
 <h3>Map with some markers</h3>
 
-<code>\{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+<code>
+  \{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
   \{{#s-map-layer map=map as |layer|}}
-    \{{#each points as |point|}}
-      \{{s-map-marker layer=layer latitude=point.latitude longitude=point.longitude}}
-    \{{/each}}
+  \{{#each points as |point|}}
+  \{{s-map-marker layer=layer latitude=point.latitude longitude=point.longitude}}
+  \{{/each}}
   \{{/s-map-layer}}
-\{{/s-map}}
+  \{{/s-map}}
 </code>
 
-{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+{{#s-map
+  latitude=latitude
+  longitude=longitude
+  zoom=zoom
+  style="width: 100%"
+as |map|
+}}
   {{#s-map-layer map=map as |layer|}}
     {{#each points as |point|}}
       {{s-map-marker layer=layer latitude=point.latitude longitude=point.longitude}}
@@ -42,33 +53,45 @@
 
 <h3>Map with markers and cards</h3>
 
-<code>\{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+<code>
+  \{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
   \{{#s-map-layer map=map as |layer|}}
-    \{{#each points as |point|}}
-      \{{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
-        \{{#if point.cardBody}}
-          \{{#s-map-card marker=marker header=point.cardHeader}}
-            &lt;dl&gt;
-              &lt;dt&gt;Plain text:&lt;/dt&gt;
-              &lt;dd&gt;\{{point.cardBody}}&lt;/dd&gt;
+  \{{#each points as |point|}}
+  \{{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
+  \{{#if point.cardBody}}
+  \{{#s-map-card marker=marker header=point.cardHeader}}
+    &lt;dl&gt;
+      &lt;dt&gt;Plain text:&lt;/dt&gt;
+      &lt;dd&gt;\{{point.cardBody}}&lt;/dd&gt;
 
-              &lt;dt&gt;HTML:&lt;/dt&gt;
-              &lt;dd&gt;\{{{point.cardBody}}}&lt;/dd&gt;
-            &lt;/dl&gt;
-          \{{/s-map-card}}
-        \{{else}}
-          \{{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
-        \{{/if}}
-      \{{/s-map-marker}}
-    \{{/each}}
+      &lt;dt&gt;HTML:&lt;/dt&gt;
+      &lt;dd&gt;\{{{point.cardBody}}}&lt;/dd&gt;
+    &lt;/dl&gt;
+  \{{/s-map-card}}
+  \{{else}}
+  \{{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
+  \{{/if}}
+  \{{/s-map-marker}}
+  \{{/each}}
   \{{/s-map-layer}}
-\{{/s-map}}
+  \{{/s-map}}
 </code>
 
-{{#s-map latitude=latitude longitude=longitude zoom=zoom style="width: 100%" as |map|}}
+{{#s-map
+  latitude=latitude
+  longitude=longitude
+  zoom=zoom
+  style="width: 100%"
+as |map|
+}}
   {{#s-map-layer map=map as |layer|}}
     {{#each points as |point|}}
-      {{#s-map-marker layer=layer latitude=point.latitude longitude=point.longitude as |marker|}}
+      {{#s-map-marker
+        layer=layer
+        latitude=point.latitude
+        longitude=point.longitude
+      as |marker|
+      }}
         {{#if point.cardBody}}
           {{#s-map-card marker=marker header=point.cardHeader}}
             <dl>
@@ -76,11 +99,16 @@
               <dd>{{point.cardBody}}</dd>
 
               <dt>HTML:</dt>
-              <dd>{{{point.cardBody}}}</dd>
+
+              <dd>{{html-safe point.cardBody}}</dd>
             </dl>
           {{/s-map-card}}
         {{else}}
-          {{s-map-card marker=marker title="Empty card" body="This card has only static text."}}
+          {{s-map-card
+            marker=marker
+            title="Empty card"
+            body="This card has only static text."
+          }}
         {{/if}}
       {{/s-map-marker}}
     {{/each}}

@@ -2,13 +2,13 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-mapy-cz',
+  name: require('./package').name,
 
-  contentFor: function(type, config) {
+  contentFor: function(type/* , config */) {
     var content = '';
 
     if (type === 'head') {
-      var src = '//api.mapy.cz/loader.js';
+      var src = 'https://api.mapy.cz/loader.js';
 
       content = '<script type="text/javascript" src="' + src + '"></script><script type="text/javascript">Loader.load();</script>';
     }

@@ -1,16 +1,20 @@
-import Ember from 'ember';
+import { guidFor } from '@ember/object/internals';
+import { observer } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/s-map-marker';
 
-export default Ember.Component.extend({
+const SMap = window.SMap;
+
+export default Component.extend({
   layout: layout,
   marker: null,
 
-  layerObserver: Ember.observer('layer.layer', function () {
+  layerObserver: observer('layer.layer', function () {
     let layer = this.get('layer.layer');
     let latitude = this.get('latitude');
     let longitude = this.get('longitude');
     let center = SMap.Coords.fromWGS84(longitude, latitude);
-    let guid = Ember.guidFor(this);
+    let guid = guidFor(this);
     let markerId = `s-map-marker-${guid}`;
     let options = {};
     let marker = new SMap.Marker(center, markerId, options);
